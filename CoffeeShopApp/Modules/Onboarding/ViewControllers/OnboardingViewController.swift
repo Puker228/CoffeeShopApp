@@ -62,10 +62,15 @@ class OnboardingViewController: UIViewController {
         
         view.addSubview(onboardingImageView)
         view.addSubview(gradientView)
-//        view.addSubview(mainTitleLable)
-//        view.addSubview(subTitleLable)
         view.addSubview(titleStackView)
         view.addSubview(getStartedButton)
+        
+        for family in UIFont.familyNames {
+            print("Family: \(family)")
+            for name in UIFont.fontNames(forFamilyName: family) {
+                print(" - \(name)")
+            }
+        }
         
         createConstraints()
     }
@@ -83,16 +88,6 @@ class OnboardingViewController: UIViewController {
     
     func createConstraints() {
         NSLayoutConstraint.activate([
-//            mainTitleLable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-//            mainTitleLable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-//            mainTitleLable.topAnchor.constraint(equalTo: gradientView.topAnchor, constant: 24),
-//            mainTitleLable.bottomAnchor.constraint(equalTo: gradientView.bottomAnchor, constant: -192),
-//            
-//            subTitleLable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-//            subTitleLable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-//            subTitleLable.topAnchor.constraint(equalTo: mainTitleLable.bottomAnchor, constant: 8),
-//            subTitleLable.bottomAnchor.constraint(equalTo: getStartedButton.topAnchor, constant: -32),
-            
             titleStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             titleStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
             titleStackView.bottomAnchor.constraint(equalTo: getStartedButton.topAnchor, constant: -32),
@@ -116,10 +111,11 @@ class OnboardingViewController: UIViewController {
     
     // MARK: - Helpers
     
-    func createLabel(text: String, size: Int, weight: UIFont.Weight, textColor: UIColor) -> UILabel {
+    func createLabel(text: String, size: CGFloat, weight: UIFont.Weight, textColor: UIColor) -> UILabel {
         let label = UILabel()
         label.text = text
-        label.font = UIFont.systemFont(ofSize: CGFloat(size), weight: weight)
+        // TODO: Написать хелпер для шрифтов
+        label.font = UIFont(name: "Sora-Regular_SemiBold", size: CGFloat(size))
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = textColor
         label.textAlignment = .center
@@ -128,13 +124,15 @@ class OnboardingViewController: UIViewController {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.5
         paragraphStyle.alignment = .center
+        
+        let font = UIFont(name: "Sora-Regular_SemiBold", size: size) ?? UIFont.systemFont(ofSize: size, weight: weight)
 
         let attributedString = NSAttributedString(
             string: text,
             attributes: [
                 .paragraphStyle: paragraphStyle,
-                .font: UIFont.systemFont(ofSize: CGFloat(size), weight: weight),
-                .kern: 0.5
+                .kern: 0.5,
+                .font: font
             ]
         )
         

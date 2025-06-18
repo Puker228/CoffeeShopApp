@@ -8,22 +8,25 @@
 import UIKit
 
 class OnboardingViewController: UIViewController {
-
+    lazy var onboardingView: UIImageView = {
+        $0.image = UIImage(named: "OnboardingImg")
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
+        return $0
+    }(UIImageView())
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .white
+        
+        view.addSubview(onboardingView)
+        
+        NSLayoutConstraint.activate([
+            onboardingView.topAnchor.constraint(equalTo: view.topAnchor),
+            onboardingView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            onboardingView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            onboardingView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

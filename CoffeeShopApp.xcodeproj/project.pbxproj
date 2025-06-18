@@ -30,6 +30,28 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1F5293D52E028C6E003A5D52 /* Exceptions for "CoffeeShopApp" folder in "CoffeeShopAppTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Modules/Delivery/View/DeliveryViewController.swift,
+				Modules/Detail/View/DetailViewController.swift,
+				Modules/Home/View/HomeViewController.swift,
+				Modules/Onboarding/View/OnboardingViewController.swift,
+				Modules/Order/View/OrderViewController.swift,
+			);
+			target = 1F97047F2E021CEE004BFA58 /* CoffeeShopAppTests */;
+		};
+		1F5293D62E028C6E003A5D52 /* Exceptions for "CoffeeShopApp" folder in "CoffeeShopAppUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Modules/Delivery/View/DeliveryViewController.swift,
+				Modules/Detail/View/DetailViewController.swift,
+				Modules/Home/View/HomeViewController.swift,
+				Modules/Onboarding/View/OnboardingViewController.swift,
+				Modules/Order/View/OrderViewController.swift,
+			);
+			target = 1F9704892E021CEF004BFA58 /* CoffeeShopAppUITests */;
+		};
 		1F9704922E021CEF004BFA58 /* Exceptions for "CoffeeShopApp" folder in "CoffeeShopApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -44,6 +66,8 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				1F9704922E021CEF004BFA58 /* Exceptions for "CoffeeShopApp" folder in "CoffeeShopApp" target */,
+				1F5293D52E028C6E003A5D52 /* Exceptions for "CoffeeShopApp" folder in "CoffeeShopAppTests" target */,
+				1F5293D62E028C6E003A5D52 /* Exceptions for "CoffeeShopApp" folder in "CoffeeShopAppUITests" target */,
 			);
 			path = CoffeeShopApp;
 			sourceTree = "<group>";

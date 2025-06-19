@@ -33,7 +33,7 @@ class OnboardingViewController: UIViewController {
     
     lazy var getStartedButton: UIButton = {
         $0.setTitle("Get Started", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        $0.titleLabel?.font = .soraFont(fontType: SoraFont.semiBold)
         $0.backgroundColor = .coffee01
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 16
@@ -42,14 +42,26 @@ class OnboardingViewController: UIViewController {
         return $0
     }(UIButton())
     
-    lazy var mainTitleLable: UILabel = createLabel(text: "Fall in Love with Coffee in Blissful Delight!", size: 32, weight: .semibold, textColor: .white)
+    lazy var mainTitleLable: UILabel = createLabel(
+        text: "Fall in Love with Coffee in Blissful Delight!",
+        textColor: .white,
+        font: .soraFont(fontType: SoraFont.semiBold, size: 32),
+        kern: 0.5
+    )
     
-    lazy var subTitleLable: UILabel = createLabel(text: "Welcome to our cozy coffee corner, where every cup is a delightful for you.", size: 14, weight: .regular, textColor: .coffeeSubTitle)
+    lazy var subTitleLable: UILabel = createLabel(
+        text: "Welcome to our cozy coffee corner, where every cup is a delightful for you.",
+        textColor: .coffeeSubTitle,
+        font: .soraFont(fontType: SoraFont.regular, size: 14),
+        kern: 1
+    )
     
     lazy var titleStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [mainTitleLable, subTitleLable])
         stackView.axis = .vertical
         stackView.spacing = 8
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -64,13 +76,6 @@ class OnboardingViewController: UIViewController {
         view.addSubview(gradientView)
         view.addSubview(titleStackView)
         view.addSubview(getStartedButton)
-        
-        for family in UIFont.familyNames {
-            print("Family: \(family)")
-            for name in UIFont.fontNames(forFamilyName: family) {
-                print(" - \(name)")
-            }
-        }
         
         createConstraints()
     }
@@ -90,7 +95,8 @@ class OnboardingViewController: UIViewController {
         NSLayoutConstraint.activate([
             titleStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             titleStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-            titleStackView.bottomAnchor.constraint(equalTo: getStartedButton.topAnchor, constant: -32),
+            titleStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 476),
+//            titleStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -142),
             
             getStartedButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             getStartedButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
@@ -111,27 +117,24 @@ class OnboardingViewController: UIViewController {
     
     // MARK: - Helpers
     
-    func createLabel(text: String, size: CGFloat, weight: UIFont.Weight, textColor: UIColor) -> UILabel {
+    func createLabel(text: String, textColor: UIColor, font: UIFont, kern: CGFloat) -> UILabel {
         let label = UILabel()
         label.text = text
-        // TODO: Написать хелпер для шрифтов
-        label.font = UIFont(name: "Sora-Regular_SemiBold", size: CGFloat(size))
+        label.font = font
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = textColor
         label.textAlignment = .center
         label.numberOfLines = 0
         
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.5
+//        paragraphStyle.lineHeightMultiple = 1.3
         paragraphStyle.alignment = .center
-        
-        let font = UIFont(name: "Sora-Regular_SemiBold", size: size) ?? UIFont.systemFont(ofSize: size, weight: weight)
 
         let attributedString = NSAttributedString(
             string: text,
             attributes: [
                 .paragraphStyle: paragraphStyle,
-                .kern: 0.5,
+                .kern: kern,
                 .font: font
             ]
         )

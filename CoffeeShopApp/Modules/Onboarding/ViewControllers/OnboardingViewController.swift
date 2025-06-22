@@ -95,12 +95,11 @@ class OnboardingViewController: UIViewController {
         NSLayoutConstraint.activate([
             titleStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             titleStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-            titleStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 476),
-//            titleStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -142),
-            
+            titleStackView.bottomAnchor.constraint(equalTo: getStartedButton.topAnchor, constant: -32),
+
             getStartedButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             getStartedButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-            getStartedButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -54),
+            getStartedButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
             getStartedButton.heightAnchor.constraint(equalToConstant: 56),
             
             gradientView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -114,6 +113,7 @@ class OnboardingViewController: UIViewController {
             onboardingImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -276),
         ])
     }
+
     
     // MARK: - Helpers
     
@@ -127,8 +127,8 @@ class OnboardingViewController: UIViewController {
         label.numberOfLines = 0
         
         let paragraphStyle = NSMutableParagraphStyle()
-//        paragraphStyle.lineHeightMultiple = 1.3
         paragraphStyle.alignment = .center
+        paragraphStyle.lineSpacing = 6
 
         let attributedString = NSAttributedString(
             string: text,

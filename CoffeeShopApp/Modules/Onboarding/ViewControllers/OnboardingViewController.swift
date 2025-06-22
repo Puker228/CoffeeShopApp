@@ -17,7 +17,7 @@ class OnboardingViewController: UIViewController {
         gradient.frame = view.bounds
         gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
         gradient.startPoint = CGPoint(x: 0, y: 0)
-        gradient.endPoint = CGPoint(x: 0, y: 0.24)
+        gradient.endPoint = CGPoint(x: 0, y: 0.44)
         view.layer.insertSublayer(gradient, at: 0)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view

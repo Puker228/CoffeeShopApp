@@ -8,6 +8,7 @@
 import UIKit
 
 class OnboardingViewController: UIViewController {
+    let hasSeenOnboardingKey = "hasSeenOnboarding"
     
     // MARK: - Views
     
@@ -40,7 +41,7 @@ class OnboardingViewController: UIViewController {
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
-    }(UIButton())
+    }(UIButton(primaryAction: centerButtonAction))
     
     lazy var mainTitleLable: UILabel = createLabel(
         text: "Fall in Love with Coffee in Blissful Delight!",
@@ -72,6 +73,12 @@ class OnboardingViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .black
         
+        let hasSeenOnboarding = UserDefaults.standard.bool(forKey: hasSeenOnboardingKey)
+            if hasSeenOnboarding {
+                navigateToHome()
+                return
+            }
+        
         view.addSubview(onboardingImageView)
         view.addSubview(gradientView)
         view.addSubview(titleStackView)
@@ -92,6 +99,7 @@ class OnboardingViewController: UIViewController {
     // MARK: - UI Setup
     
     func createConstraints() {
+        print(UserDefaults().dictionaryRepresentation())
         NSLayoutConstraint.activate([
             titleStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             titleStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
@@ -141,5 +149,16 @@ class OnboardingViewController: UIViewController {
         
         label.attributedText = attributedString
         return label
+    }
+    
+    lazy var centerButtonAction: UIAction = UIAction { [weak self] _ in
+        UserDefaults.standard.set(true, forKey: self?.hasSeenOnboardingKey ?? "")
+        
+        self?.navigateToHome()
+    }
+
+    func navigateToHome() {
+        let nextVC = HomeViewController()
+        navigationController?.setViewControllers([nextVC], animated: true)
     }
 }

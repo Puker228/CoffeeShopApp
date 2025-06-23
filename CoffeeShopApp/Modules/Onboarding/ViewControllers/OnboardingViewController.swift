@@ -8,8 +8,6 @@
 import UIKit
 
 class OnboardingViewController: UIViewController {
-    let hasSeenOnboardingKey = "hasSeenOnboarding"
-    
     // MARK: - Views
     
     lazy var gradientView: UIView = {
@@ -68,16 +66,16 @@ class OnboardingViewController: UIViewController {
     }()
     
     // MARK: - Lifecycle
+    let onboardingService = OnboardingService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
         
-        let hasSeenOnboarding = UserDefaults.standard.bool(forKey: hasSeenOnboardingKey)
-            if hasSeenOnboarding {
-                navigateToHome()
-                return
-            }
+        if onboardingService.hasSeenOnboarding {
+            navigateToHome()
+            return
+        }
         
         view.addSubview(onboardingImageView)
         view.addSubview(gradientView)
@@ -152,8 +150,7 @@ class OnboardingViewController: UIViewController {
     }
     
     lazy var centerButtonAction: UIAction = UIAction { [weak self] _ in
-        UserDefaults.standard.set(true, forKey: self?.hasSeenOnboardingKey ?? "")
-        
+        self?.onboardingService.markAsSeen()
         self?.navigateToHome()
     }
 

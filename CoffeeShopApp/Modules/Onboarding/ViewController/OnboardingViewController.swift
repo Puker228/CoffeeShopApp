@@ -97,7 +97,6 @@ class OnboardingViewController: UIViewController {
     // MARK: - UI Setup
     
     func createConstraints() {
-        print(UserDefaults().dictionaryRepresentation())
         NSLayoutConstraint.activate([
             titleStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             titleStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
@@ -122,32 +121,6 @@ class OnboardingViewController: UIViewController {
 
     
     // MARK: - Helpers
-    
-    func createLabel(text: String, textColor: UIColor, font: UIFont, kern: CGFloat) -> UILabel {
-        let label = UILabel()
-        label.text = text
-        label.font = font
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = textColor
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
-        paragraphStyle.lineSpacing = 6
-
-        let attributedString = NSAttributedString(
-            string: text,
-            attributes: [
-                .paragraphStyle: paragraphStyle,
-                .kern: kern,
-                .font: font
-            ]
-        )
-        
-        label.attributedText = attributedString
-        return label
-    }
     
     lazy var centerButtonAction: UIAction = UIAction { [weak self] _ in
         self?.onboardingService.markAsSeen()

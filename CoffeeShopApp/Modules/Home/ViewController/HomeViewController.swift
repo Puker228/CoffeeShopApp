@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
             gradientView.topAnchor.constraint(equalTo: view.topAnchor),
             gradientView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             gradientView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            gradientView.heightAnchor.constraint(equalToConstant: 200)
+            gradientView.heightAnchor.constraint(equalToConstant: 280)
         ])
     }
 }
